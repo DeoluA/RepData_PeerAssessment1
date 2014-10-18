@@ -74,7 +74,7 @@ activity
 ## ..        ...      ...   ...
 ```
 
-## What is mean total number of steps taken per day?
+## What is the mean total number of steps taken per day?
 #### 1. Histogram of the total number of steps taken each day
 To accomplish this, dataset was grouped by dates, and steps across each day summed.
 
@@ -106,7 +106,7 @@ with(tstepsperday, mean(total, na.rm=TRUE))
 ```
 
 ```r
-##Mean
+##Median
 with(tstepsperday, median(total, na.rm=TRUE))
 ```
 
@@ -117,7 +117,7 @@ Ergo,
  - the mean total number of steps per day is **10766.19 steps** 
  - the median total number of steps per day is **10765 steps** 
  
-## What is the average daily initial pattern?
+## What is the average daily activity pattern?
 #### 1. Time-series plot
 Here, the activity dataset is now grouped by **intervals**, and the mean of steps across each day calculated (with ```NA```s removed).
 
@@ -135,7 +135,7 @@ qplot(interval, avg, data=avgday, geom="line", xlab="5-minute Intervals", ylab="
 ![plot of chunk grouping by interval; time series plot](figure/grouping by interval; time series plot-1.png) 
 
 #### 2. The 5-minute interval with the maximum number of steps?
-The above plot indicates the value lies somewhere between *750* and *1000* intervals. Perhaps a plot with more divisions and with the maximum indicated on its x-axis will yield a more accurate observation:
+The above plot indicates the value lies somewhere between the *750* and *1000* intervals. Perhaps a plot with more divisions and with the maximum indicated on its x-axis will yield a more accurate observation:
 
 ```r
 ggplot(avgday, aes(x = interval, y = avg)) +
@@ -163,7 +163,7 @@ And so the **precise 5-minute interval** (on average across all the days in the 
 
 ## Imputing missing values
 #### 1. The total number of rows with NAs
-Rows with missing values in the 'steps' column are retrieved thus:
+Number of rows with missing values in the 'steps' column is retrieved thus:
 
 ```r
 nrow(activity %>% filter(is.na(steps)))
@@ -227,6 +227,7 @@ with(wtstepsperday, hist(total, xlab="Total Steps Taken Per Day",
 ##### b. The mean and median total number of steps taken per day; NAs filled in
 
 ```r
+##Mean with NAs filled in
 with(wtstepsperday, mean(total))
 ```
 
@@ -235,6 +236,7 @@ with(wtstepsperday, mean(total))
 ```
 
 ```r
+##Median with NAs filled in
 with(wtstepsperday, median(total))
 ```
 
@@ -261,7 +263,7 @@ with(wtstepsperday, hist(total, xlab="Total Steps Taken Per Day",
 
 ![plot of chunk comparison histogram of first and second](figure/comparison histogram of first and second-1.png) 
 
-## Are there differences in initial patterns between weekdays and weekends?
+## Are there differences in activity patterns between weekdays and weekends?
 #### 1. New factor variable -- "weekday" and "weekend" levels
 
 ```r
@@ -277,7 +279,7 @@ for (i in 1:nrow(wactivity))
   ##The above loop will populate the vector with the corresponding "Weekday" and "Weekend" values
 }
 ##Finally, this populated vector is coerced into a factor,
-##and then inserted into the dataset's newly created factor column
+##and then inserted into the dataset's newly created factor column "day"
 wactivity$day<-factor(test)
 
 rm("test","i") ##these vectors may now be discarded.
