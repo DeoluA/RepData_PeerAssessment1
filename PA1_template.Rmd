@@ -14,7 +14,7 @@ library(lubridate)
 ##download the dataset
 download.file(url="https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip",
               destfile="repdata-data-activity.zip")
-##unzip it
+##unzip it 
 unzip(zipfile="repdata-data-activity.zip",
       exdir = "repdata-data-activity")
 ##load it into our dataframe
